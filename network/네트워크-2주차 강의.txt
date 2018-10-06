@@ -1,0 +1,79 @@
+Networ Programming -1단원
+
+네트워크의 프로그래밍이란?
+-Network programming is no longer the province of a few specialists. It has become a
+core part of every developer’s toolbox. 
+
+GitHub : commit 이란?
+-branch 에서 수정이되어 다시 파일을 등재하여 Master*branch에 올라가는것을 commit이라고함
+
+네트워크 프로그래밍 시간엔 무엇을 배울까?
+-TCP/IP IP TCP UDP firrewalls proxy Inteernet standardization을 배울것임
+
+네트워크란?
+-실시간으로 데이터를 송수신 할 수 있는 컴퓨터와 다른장치의 집합을 네트워크라고함
+예 ) 공유기 시계 포스기 등
+
+노드란?
+-네트워크가 올라온 기계들을 노드라고함(임이의 장치)
+예) 컴퓨터 코카콜라 머신 등
+호스트란?
+-??? 노드와 호스트의차이()
+
+네트워크의 특징이란?
+-모든 네트워크는 유니크한 주소를 가지고있다.
+
+IPv4 , IPv6 , 물리적주소 차이란?
+IPv4 는 32비트로 표현 2의 32승만큼 약 40억개 표현이 가능
+10진수로 표현
+하지만 IP주소가 넘쳐 더이상 필요가없음
+IPv6 128비트로 표현 2의 128만큼 표현
+16진수로 표현
+:으로 구분 :사이에 0이 들어감
+물리적 주소란 램카드,와이파이 ,블루투스 주소
+48비트 
+
+패킷과 서킷의 차이점
+패킷-데이터를 전부 보내지 않고 데이터를 잘라서 전송하는 데이터들의 집합 즉 다른경로 그래서 각자 다른 주소가 필요
+장점 : 특정경로를 거치지않아 전송에 효율적이다.
+예) 인터넷 ,편지라고생각하면된다.
+서킷-데이터를 한번에 연결하여 전송 즉 같은경로
+예) 전화
+프로토콜이란 ?
+컴퓨터들이 어떻게 통신을 하는지를 정확하게 정의한 규약들
+예)HTTP-웹서버와 웹간의 통신할때 TCP ,IP WIFI등
+
+네트워크 계층별 프로토콜과 역활이란?
+프로토콜의 구조
+TCP-4 
+OSI-7
+7-application
+6-presentation
+5-session 
+4-transport 역활 TCP/UDP 두가지가 있음 
+	TCP는 데이터가 손실되거나 손상되지않도록 전송,순서대로 오는지 확인이 필요(sequence number필)
+	그래서 TCP에는 sn가 헤더가 앞에 붙어있음
+	UDP는 오는것만 처리(영상처리)
+	TCP 의경우 Appclication 에서 내려온 TCP Header가 붙는다.
+3-network(internet) 역활 : IP(송*수신의주소)/routing(송신)
+	4번에서 내려온 패킷+ IP가 붙는다.
+2-data link(Network Access) 역활 : 데이터를 순서대로 처리, SUB로 LLC와 MAC(중간자가 조절)로 나눔
+	3번에서 내려온 패킷+ 이더넷 넘버가 붙는다.
+1-phtsical 역활 : 무선인지 유선인지 datarate-속도결정, NRZ인지 결정
+	2번에서 내려온 패킷+확인(이더넷,ip,tcp header)을 전송
+=>지금은 TCP/IP-5 계층으로 전부 바뀜 왜??
+
+이더넷(IEEE 802.3)이란 ?
+유선을 이용한 통신 , 1,2단계의 프로토콜을 사용
+WIFI(IEEE 802.11)이란?
+무선을 이용한 통신
+BlueTooth(IEEE 802.15.4) 이란?
+1,2단계 프로토콜을
+LTE이란
+
+DNS란?
+-호스트의 도메인 이름을 호스트의 네트워크 주소로 바꾸거나 그 반대의 변환을 수행할 수 있도록 개발
+VPN이란 ?
+-그 지역에있는 VPN Server에 접속하여 그지역에 있는것처럼 접속
+Proxy Server이란?
+-우회경로를 통해 서버에 접속, 카피한 서버를 리턴해주는 역활

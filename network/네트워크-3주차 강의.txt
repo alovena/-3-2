@@ -1,0 +1,75 @@
+#네트워크 3주차 수업내
+
+RFCs 란?
+
+RFC는 이미 작업이 완료된 프로토콜이다.
+
+The Hypertext Transfer Protocol (HTTP) is an application-level
+   protocol with the lightness and speed necessary for distributed,
+   collaborative, hypermedia information systems
+-HTTP는 5계층의 프로토콜이며 협동적,분배하는,하이퍼미디어 시스템에 필요로하는 심플한,속도가빠른 시스템입니다
+RFC 862(Echo Protocol) 이란??
+An ehco service 는 데이터를 보내면원본 source로 다시 돌려받음
+A very useful debugging and measurement tool is an echo service.  An
+echo service simply sends back to the originating source any data it
+receives.
+Echo service는 Tcp위에 연결된상태로 정의 되며 TCP port7번에서 서버가 연결된다.
+One echo service is defined as a connection based application on TCP.
+
+A server listens for TCP connections on TCP port 7. 
+
+숙제 RFC 867(DaytimeProtocol),868(Time Protocol) +하고싶은것1개
+의 요약본을 보고 핵심 내용을 적을 것!
+ex) https://www.rfc-editor.org/rfc/rfc1945.txt
+
+Ascll utf-8 enc-kr 이 먼지 찾아보기
+
+ex) A를 저장하려면 byte로하면 0x61
+encoding-> ASCII = 1bytes,unicode=2bytes
+UTF-8은 영어는 1bytes,한글 및한자는 3bytes
+
+
+Streams
+
+A large part of what network programs do is simple input and output: moving bytes
+from one system to another. Bytes are bytes
+대부분의 네트워크 프로그램이 하는것은 input output (바이트의 움직임)이다.
+InputStream : read
+OutputStream : write
+
+After a stream is created, you can often ignore the details of exactly what it is you’re reading or writing.
+스트림이 어떻게 읽고 쓰는지는 모르겠다.
+즉 , Appclication 입장에서 스트림만 연결하여 사용
+
+Reader Writer 클래스가 스트림을 읽게 해준다.
+
+Streams are synchronous; that is, when a program (really a thread) asks a stream to read
+or write a piece of data, it waits for the data to be read or written before it does anything.
+스트림은 동기식이다.(동기식 : 한라인실행후 다음라인 실행 즉, 무엇인가 오기전(stream)까진 읽어지지 않는다. 
+비동기식 : 작업의 결과를 기다리지않고 작업이 끝나면 알려주는것  멀티쓰레드 단점 :  ???)
+
+자바 generateCharacter코드작성
+
+BufferedOutputStream
+버퍼를 감싸 데이터를 output => 전송 속도 up
+
+flush란?
+버퍼에 차든 말든 관계없이
+남은 버퍼를 내리는것 
+
+자바 7이후 OutputStream out=new FileOutputStream("data.txt");
+를사용하면 객체를 닫지않아도됨.!
+
+read() 1bytes를 읽어 return
+read(byte[] b) 읽어 배열에 저장 후 몇바이터를 읽었는지 return 
+read(byte[]b int off int len) 읽어 배열에 저장후 b의 인덱스 off 부터 ,최대 길이len 만큼
+
+byte[] input = new byte[1024];
+int bytesRead = in.read(input);
+배열을 넣으면 1024만큼 다 읽지 못해 어디까지 어디서부터 읽을지를 알려줘야함
+int bytesRead = 0;
+int bytesToRead = 1024;
+byte[] input = new byte[bytesToRead];
+while (bytesRead < bytesToRead) {
+bytesRead += in.read(input, bytesRead, bytesToRead - bytesRead);
+}

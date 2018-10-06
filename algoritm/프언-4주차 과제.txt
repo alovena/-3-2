@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct Node {
+	int data;
+	struct Node *next;
+}Node;
+
+typedef struct Stack {
+	Node *top;
+}Stack;
+
+void push(Stack *stack, int data);
+int pop(Stack *stack);
+void InitStack(Stack *stack);
+int IsEmpty(Stack *stack);
+
+
+
+
+int array[8] = { 15,22,13,27,12,10,20,25 };
+int pp = 0;
+
+void quicksort(int start, int end);
+void partition(int start, int end);
+void printA(int* a, int n);
+
+int main() {
+	//퀵소트
+	quicksort(0, 7);
+	//배열 출력 함수 (배열, 배열 크기)
+	printA(array, 8);
+	printf("\n");
+
+	return 0;
+}
+
+void partition(int start, int end) {
+	int i, j, tmp;
+	//분활안에서의 피봇 설정
+	int pivotitem = array[start];
+
+	j = start;
+	for (i = start + 1; i <= end; i++) {
+		if (array[i] < pivotitem) {
+			j++;
+			tmp = array[i];
+			array[i] = array[j];
+			array[j] = tmp;
+		}
+	}
+	tmp = array[start];
+	array[start] = array[j];
+	array[j] = tmp;
+	pp = j;
+}
+
+void quicksort(int start, int end) {
+	//스택 선언
+	int top = 1;
+	Stack l;
+	Stack h;
+	//스택 초기화
+	InitStack(&l);
+	InitStack(&h);
+	push(&l, start);
+	push(&h, end);
+	while (top>0) {
+		start = pop(&l);
+		end = pop(&h);
+		top--;
+		partition(start, end);
+		if ((pp + 1) < end) {
+			top++;
+			push(&l, pp+1);
+			push(&h, end);
+		}
+		if (start < (pp - 1)) {
+			top++;
+			push(&l, start);
+			push(&h, pp-1);
+		}
+	}
+}
+
+void printA(int* a, int n) {
+	for (int i = 0; i < n; i++) {
+		printf("%5d", a[i]);
+	}
+}
+
+void push(Stack *stack, int data) {
+	Node *now = (Node *)malloc(sizeof(Node));
+	now->data = data;
+	now->next = stack->top;
+	stack->top = now;
+}
+
+int pop(Stack *stack) {
+	Node *now;
+	int re;
+	if (IsEmpty(stack)) {
+		return 0;
+	}
+	now = stack->top;
+	re = now->data;
+
+	stack->top = now->next;
+	free(now);
+	return re;
+}
+
+int IsEmpty(Stack *stack) {
+	return stack->top == NULL;
+}
+
+void InitStack(Stack *stack) {
+	stack->top = NULL;
+}

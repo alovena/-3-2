@@ -1,0 +1,113 @@
+소스
+#include <iostream> 
+using namespace std;
+
+void quicksort(int low, int high, int arr[]);
+void partition(int low, int high, int& pivotpoint, int arr[]);
+int main(void) {
+int arr[50] = { 0 };
+int i, number;
+int low, high;
+cout << "몇개를입력하시겠습니까 << endl;
+cin >> number;
+for (i = 1; i<=number; i++) {
+cin >> arr[i];
+}
+low = 1;
+high = number ;
+quicksort(low, high, arr);
+for (i = 1; i<=number; i++) {
+cout << arr[i] << ""
+}
+return 0;
+}
+void quicksort(int low, int high, int arr[]) {
+int pivotpoint;
+if (high>low) {
+partition(low, high, pivotpoint, arr);
+quicksort(low, pivotpoint - 1, arr);
+quicksort(pivotpoint + 1, high, arr);
+}
+}
+void partition(int low, int high, int& pivotpoint, int arr[]) {
+
+int i, j, temp, pivotitem;
+pivotitem = arr[low];
+j = low
+for (i = low+1; i <= high i++) {
+if (arr[i]<pivotitem) {
+j++;
+temp = arr[i];
+arr[i] = arr[j];
+arr[j] = temp;
+
+}
+pivotpoint = j;
+temp = arr[low];
+arr[low] = arr[pivotpoint];
+arr[pivotpoint] = temp;
+}
+}
+====================
+#include <iostream> 
+using namespace std;
+void arraycopy(int src[], int dest[], int size);
+void mergesort(int n, int arr[]);
+void merge(int h, int m, int left[], int right[], int key[]);
+int main(void) {
+int arr[50] = { 0 };
+int i, number;
+int low, high;
+cout << "몇개를입력하시겠습니까"<< endl;
+cin >> number;
+for (i = 1; i<=number; i++) {
+cin >> arr[i];
+}
+mergesort(number, arr);
+for (i = 1; i<=number; i++) {
+cout << arr[i] << ""
+}
+return 0;
+}
+void mergesort(int n, int arr[]) {
+int h = n / 2;
+int m = n - h;
+int L_index, R_index, key_index;
+int *Ldiv, *Rdiv;
+if (n > 1) {
+Ldiv = (int *)malloc(h * sizeof(int));
+Rdiv = (int *)malloc(m * sizeof(int));
+
+arraycopy(arr, Ldiv, h);
+arraycopy(arr + h, Rdiv, m);
+
+mergesort(h, Ldiv);
+mergesort(m, Rdiv);
+merge(h, m, Ldiv, Rdiv, arr);
+free(Ldiv);
+free(Rdiv);
+}
+}
+void merge(int h, int m, int left[], int right[], int key[]) {
+int i, j, k;
+i = j = k = 0;
+while (i < h&&j < m) {
+if (left[i] < right[i]) {
+key[k] = left[i++];
+}
+else {
+key[k] = right[j++];
+}
+k++;
+}
+if (i == h)
+arraycopy(right + j, key + k, m - j);
+else
+arraycopy(left + i, key + k, h - i);
+}
+void arraycopy(int src[], int dest[], int size) {
+int i;
+for (i = 0; i < size i++) {
+dest[i] = src[i];
+}
+}

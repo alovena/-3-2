@@ -1,0 +1,73 @@
+
+#include<stdio.h>
+#include<time.h>
+#include<stdlib.h>
+int location(int low, int high ,int arr[],int x);
+int fib(int n);
+int fac(int n);
+int main(void) {
+int i,x;
+clock_t start, end;
+int arr[1000] = { 0 };
+printf("피보나치(재귀) 시간복잡도\n");
+for (i = 0; i < 50; i += 5) {
+start = clock();
+fib(i);
+end = clock();
+printf("%d번째검색시간:%lf\n", i, (double)(end - start)/1000);
+}
+printf("팩토리얼(재귀) 시간복잡도\n");
+for (i = 0; i < 50; i += 5) {
+start = clock();
+fac(i);
+end = clock();
+printf("%d번째검색시간:%lf\n", i, (double)(end - start) / 1000);
+}
+printf("이분탐색시간복잡도\n");
+for (i = 0; i <100; i++) {
+arr[i] = i;
+}
+for (i = 0; i < 100; i += 5) {
+x = i/2;
+start = clock();
+printf("검색인덱스:%d\n", location(0, i, arr, x));
+end = clock();
+printf("%d번째검색시간:%lf",i,(double)(end-start));
+}
+
+
+
+
+return 0;
+}
+
+int location(int low, int high, int arr[], int x) {
+int mid;
+
+if (low > high)
+return 0;
+else {
+mid = (low + high) / 2;
+
+if (x == arr[mid])
+return mid;
+else if (x < arr[mid])
+return location(low, mid - 1,arr,x);
+else
+return location(mid + 1, high,arr,x);
+
+}
+}
+int fib(int n) {
+if (n <= 1)
+return n
+else
+return fib(n - 2) + fib(n-1);
+}
+int fac(int n) {
+if (n <= 1)
+return n
+else
+return fac(n - 1)*n
+}
+=====================

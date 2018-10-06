@@ -1,0 +1,81 @@
+#include<stdio.h>
+int location(int low,int high);
+int arr[3] = { 2,3,4 };
+int x;
+int main(void) {
+	
+	int n, num, x, i = 0;
+	//int arr[3];
+	//printf("순서대로 입력해주세요");
+	//for (i = 0; i < 3; i++) {
+	//	scanf("%d", arr[i]);
+	//}
+	
+	printf("검색할 숫자를 입력해주세요");
+	scanf("%d", &x);
+	printf("%d\n",location(0,2));
+	return 0;
+}
+int location(int low,int high) {
+	int mid;
+
+	if (low > high)
+		return 0;
+	else {
+		mid = (low + high) / 2;
+		printf("%d", x);
+		if (x == arr[mid])
+			return mid;
+		else if (x < arr[mid])
+			return location(low, mid - 1);
+		else
+			return location(mid + 1, high);
+
+	}
+}
+
+============================
+#include<stdio.h>
+int factorial(int n);
+int factorial2(int n);
+int main(void) {
+	int num;
+	printf("수를 입력해주세요.!");
+	scanf("%d", &num);
+	printf("%d\n",factorial(num));
+	printf("%d\n", factorial2(num));
+}
+
+int factorial(int n) {
+	if (n <= 1)
+		return 1;
+	else
+		return n*factorial(n - 1);
+	
+}
+int factorial2(int n) {
+	int i = 1,result=1;
+	for (i = 1; i <= n; i++) {
+		result *= i;
+	}
+	return result;
+}
+============================
+#include<stdio.h>
+int fib(int n);
+int main(void) {
+	int num;
+	printf("음이 아닌 정수를 입력해주세요");
+	scanf("%d", &num);
+	if (num >= 0) {
+		printf("피보나치 값 : %d",fib(num));
+	}
+	else
+		printf("음이 아닌 정수를 입력해주세요!!");
+}
+int fib(int n) {
+	if (n <= 1)
+		return n;
+	else
+		return (fib(n - 1) + fib(n - 2));
+}

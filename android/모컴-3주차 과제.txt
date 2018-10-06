@@ -1,0 +1,127 @@
+package ttttt;
+
+import java.util.Scanner;
+
+public class mobile_test1 {
+
+	public static void main(String[] args) {
+		String str;
+		String alpa = "abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		int count[] = new int[52];
+		int j = 0;
+		char[] ch = {};
+		char[] alpa1 = {};
+		Scanner sc = new Scanner(System.in);
+		str = sc.nextLine();
+		// count 배열 초기화!
+		for (int i = 0; i < count.length; i++) {
+			count[i] = 0;
+		}
+		// 입력과 알파벳사전 문자열을 char 배열로 쪼개기
+		for (int i = 0; i < str.length(); i++) {
+			ch = str.toCharArray();
+		}
+		for (int i = 0; i < alpa.length(); i++) {
+			alpa1 = alpa.toCharArray();
+		}
+		// 알파벳과 문자열 비교 알고리즘
+		for (int i = 0; i < alpa1.length; i++) {
+			for (j = 0; j < ch.length; j++) {
+				if (alpa1[i] == ch[j]) {
+					count[i]++;
+					if (count[i] > 1)
+						System.out.println(ch[j] + "의갯수:" + count[i]);
+				}
+			}
+
+		}
+
+	}
+}
+====================
+package ttttt;
+
+import java.util.ArrayList;
+
+public class mobile_test2 {
+
+	public static void main(String[] args) {
+		// convert int to string example
+		int i = 1234;
+		ArrayList list = new ArrayList();
+		String str1 = Integer.toString(i);
+		String str2 = String.valueOf(i);
+		String str3 = i + "";
+		StringBuilder str4 = new StringBuilder();
+		str4.append("");
+		str4.append(i);
+		System.out.println(str1);
+		System.out.println(str2);
+		System.out.println(str3);
+		System.out.println(str4);
+	}
+
+}
+=======================
+package ttttt;
+
+import java.util.Scanner;
+
+public class mobile_test3 {
+
+	public static void main(String[] args) {
+		String str;
+		char ch[] = { 0 };
+
+		System.out.println("문자열을 입력해주세요!");
+		Scanner sc = new Scanner(System.in);
+		str = sc.nextLine();
+		// 문자열을 배열에 저장
+		for (int i = 0; i < str.length(); i++) {
+			ch = str.toCharArray();
+		}
+		// 거꾸로부터 출력
+		for (int i = ch.length - 1; i >= 0; i--) {
+			System.out.print(ch[i]);
+		}
+
+	}
+
+}
+=================
+package ttttt;
+
+interface A {
+	String A = "AAA";
+	String methodA();
+}
+interface B {
+	String B = "BBB";
+	String methodB();
+}
+//C는 A,B구현
+class C implements A, B {
+	public String methodA() {
+		return A + B;
+	}
+	public String methodB() {
+		return B + A;
+	}
+}
+//클래스D는 오버라이딩
+class D extends C implements A, B {
+	String D = "DDD";
+	public String methodA() {
+		return D + methodB();
+	}
+}
+public class mobile_test4 {
+	public static void main(String[] args) {
+		C c = new C();
+		System.out.println(c.methodA());
+		System.out.println(c.methodB());
+		c = new D(); //업캐스팅
+		System.out.println(c.methodA());
+		System.out.println(c.methodB());
+	}
+}

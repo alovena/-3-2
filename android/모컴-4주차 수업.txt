@@ -1,0 +1,127 @@
+package com.example.com418.myapplication6;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    CheckBox mycheck1;
+    CheckBox mycheck2;
+    RadioGroup radioGroup;
+    RadioButton rBtn1;
+    RadioButton rBtn2;
+    ImageView imageview;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mycheck1 = (CheckBox) findViewById(R.id.check1);
+        mycheck2 = (CheckBox) findViewById(R.id.check2);
+        radioGroup=(RadioGroup)findViewById(R.id.rGroup1);
+        rBtn1=(RadioButton) findViewById(R.id.rButton1);
+        rBtn2=(RadioButton) findViewById(R.id.rButton2);
+        imageview=(ImageView)findViewById(R.id.ImageView1);
+        imageview.setImageResource(R.drawable.ic_launcher_background);
+        mycheck1.setOnCheckedChangeListener(listener);
+
+        mycheck2.setOnCheckedChangeListener(listener);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i==R.id.rButton1){
+                    imageview.setImageResource(R.drawable.ic_android_black_24dp);
+                }
+                if(i==R.id.rButton2){
+                    imageview.setImageResource(R.drawable.ic_launcher_foreground);
+                }
+            }
+        });
+
+
+    }
+    CompoundButton.OnCheckedChangeListener listener= new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            int v=compoundButton.getId();
+            switch (v){
+                case R.id.check1:
+                    if(compoundButton.isChecked()){
+                        Toast.makeText(getApplicationContext(),compoundButton.getText().toString()+"眉农",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+
+                        Toast.makeText(getApplicationContext(),compoundButton.getText().toString()+"眉农秦力",Toast.LENGTH_LONG).show();
+
+                    }
+                    break;
+                case R.id.check2:
+                    if(compoundButton.isChecked()){
+                        Toast.makeText(getApplicationContext(),compoundButton.getText().toString()+"眉农",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+
+                        Toast.makeText(getApplicationContext(),compoundButton.getText().toString()+"眉农秦力",Toast.LENGTH_LONG).show();
+
+                    }
+                    break;
+            }
+
+        }
+    };
+}
+=========xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+    <CheckBox
+        android:id="@+id/check1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox1"
+        />
+    <CheckBox
+        android:id="@+id/check2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox2"
+        />
+    <RadioGroup
+        android:id="@+id/rGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巢己"
+            android:layout_marginRight="10dp"
+            />
+        <RadioButton
+            android:id="@+id/rButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="咯己"
+            />
+
+    </RadioGroup>
+    <ImageView
+        android:id="@+id/ImageView1"
+        android:background="@drawable/ic_launcher_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        />
+</LinearLayout>

@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include <math.h>
+#define MAX 5
+
+int point[MAX] = { 0 };
+int dist[MAX][MAX];
+int x[5] = { 0,1,4,5,7 };
+int y[5] = { 0,2,3,2,3 };
+int cal(int x, int y, int _x, int _y);
+int searchShort(int x);
+
+int main() {
+	for (int i = 0; i < MAX; i++) {
+		for (int j = 0; j < MAX; j++) {
+			dist[i][j] = cal(x[i], y[i], x[j], y[j]);
+		}
+	}
+	
+	int sum = 0;
+	for (int i = 0; i < MAX; i++) {
+		sum += searchShort(i);
+	}
+	sum += cal(x[4], y[4], x[0], y[0]);
+	printf("최소 경로는 %d 입니다.\n", sum);
+}
+
+int cal(int x, int y, int _x , int _y) {
+	return (int)(sqrt(pow(x-_x,2)+pow(y-_y,2)));
+}
+
+int searchShort(int x) {
+	int min = dist[x][x + 1];
+	for (int i = x+1; i < MAX; i++) {
+		if (min > dist[x][i]) {
+			min = dist[x][i];
+		}
+	}
+	return min;
+}
