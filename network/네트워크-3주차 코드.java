@@ -3,7 +3,7 @@ package test;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
+///data가 write 예제
 public class test8 {
 
 	public static void main(String[] args) {
