@@ -1,0 +1,233 @@
+package tttt;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class tttt {
+	static String dataFile="asdsadsa";
+	static final double[] prices= {19.99,9.99,15.99,3.99,4.99};
+	static final int[] units= {12,8,13,29,50};
+	static final String[] descc= {"java","jjjj","Duke","Java","java"};
+	public static void main(String []args) throws IOException {
+		try {
+			DataOutputStream out=new DataOutputStream(new BufferedOutputStream(new FileOutputStream(dataFile)));
+			for(int i=0;i<prices.length;i++) {
+				out.writeInt(units[i]);
+				out.writeDouble(prices[i]);
+				out.writeUTF(descc[i]);
+			}
+			
+		}catch(IOException e) {
+			 System.err.println(e.getMessage());
+		}
+		
+		
+		 try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(dataFile)))) {
+
+	         double price;
+	         int unit;
+	         String desc;
+
+	         try {
+	            while (true) {
+	               unit = in.readInt();
+	               price = in.readDouble();
+	               desc = in.readUTF();
+	               System.out.format("You ordered %d units of %s at %s%n", unit, desc, price);
+	              // total += unit * price;
+	            }
+	         } catch (EOFException e) {
+	            System.err.println(e.getMessage());
+
+	         }
+	      }
+	}
+}
+=========================================
+package tttt;
+
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class tttt2 {
+
+   // TODO Auto-generated method stub
+
+   static final String dataFile = "invoicedata";
+   static final double[] prices = { 19.99, 9.99, 15.99, 3.99, 4.99 };
+   static final int[] units = { 12, 8, 13, 29, 50 };
+   static final String[] descs = { "Java", "Java", "Duke", "Java", "Java" };
+
+   public static void main(String[] args) throws IOException {
+      // DataOutputStream = null;
+
+      try (DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(dataFile)))) {
+         int totalLength = 0;
+
+         for (int i = 0; i < prices.length; i++) {
+
+            out.writeInt(units[i]);
+            out.writeDouble(prices[i]);
+            out.writeUTF(descs[i]);
+            totalLength += descs[i].length();
+         }
+         System.out.println("string length =" + totalLength);
+      
+
+      } catch (IOException ex) {
+         System.err.println(ex.getMessage());
+      }
+
+      // DataInputStream in = null;
+      double total = 0.0;
+
+      try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(dataFile)))) {
+
+         double price;
+         int unit;
+         String desc;
+
+         try {
+            while (true) {
+               unit = in.readInt();
+               price = in.readDouble();
+               desc = in.readUTF();
+               System.out.format("You ordered %d units of %s at %s%n", unit, desc, price);
+               total += unit * price;
+            }
+         } catch (EOFException e) {
+            System.err.println(e.getMessage());
+
+         }
+      }
+   }
+}================================================
+package tttt;
+
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+
+public class tttt3 {
+
+   // TODO Auto-generated method stub
+
+   static final String dataFile = "invoicedata";
+   static final double[] prices = { 19.99, 9.99, 15.99, 3.99, 4.99 };
+   static final int[] units = { 12, 8, 13, 29, 50 };
+   static final String[] descs = { "Java", "Java", "Duke", "Java", "Java" };
+
+   public static void main(String[] args) throws IOException {
+      // DataOutputStream = null;
+
+      try (OutputStream out = new FileOutputStream("data.txt");
+    		  OutputStreamWriter outputStreamWriter=new OutputStreamWriter(out, "utf-8")) {
+ 
+    	  outputStreamWriter.write("ÇÑ¹ç´ëtest123");
+      }catch(IOException e) {
+    	  System.err.println(e.getMessage());
+      }
+
+      // DataInputStream in = null;
+      double total = 0.0;
+
+      try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(dataFile)))) {
+
+         double price;
+         int unit;
+         String desc;
+
+         try {
+            while (true) {
+               unit = in.readInt();
+               price = in.readDouble();
+               desc = in.readUTF();
+               System.out.format("You ordered %d units of %s at %s%n", unit, desc, price);
+               total += unit * price;
+            }
+         } catch (EOFException e) {
+            System.err.println(e.getMessage());
+
+         }
+      }
+   }
+}==========================
+=============================================
+package tttt;
+
+public class thread {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Create tasks
+		Thread printA = new PrintChar('a', 100);
+		Thread printB = new PrintChar('b', 100);
+		Runnable print100 = new PrintNum(100);
+
+		// Create threads
+		// Thread thread1 = new Thread(printA);
+		// Thread thread2 = new Thread(printB);
+		Thread thread3 = new Thread(print100);
+		thread3.start();
+		// Start threads
+		printA.start();
+		// thread1.start();
+		printB.start();
+		
+
+	}
+
+}
+
+class PrintChar extends Thread {
+	private char charToPrint; // The character to print
+	private int times; // The number of times to repeat
+
+	public PrintChar(char c, int t) {
+		charToPrint = c;
+		times = t;
+	}
+
+	@Override // Override the run() method to tell the system
+	public void run() {
+		for (int i = 0; i < times; i++) {
+			System.out.print(charToPrint);
+		}
+	}
+}
+
+class PrintNum implements Runnable {
+	private int lastNum;
+
+	public PrintNum(int n) {
+		lastNum = n;
+	}
+
+	public void run() {
+		for (int i = 1; i <= lastNum; i++) {
+			System.out.print(" " + i);
+		}
+	}
+}
+==============================================

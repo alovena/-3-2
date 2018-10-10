@@ -1,0 +1,75 @@
+과제2-해석
+Time protocol
+This protocol provides a site-independent, machine readable date and
+time.  The Time service sends back to the originating source the time in seconds since midnight on January first 1900.
+(서버와 클라이언트 관계에서) 클라이언트의 입력에 상관없이 시간과 데이터를 제공 --4바이트로 보냄,포트번호37번
+================================================
+ASCII-실제7비트
+MS949--한글 2byte 사용,영어1바이트
+Unicode--한글 2byte 사용,영어2바이트
+UTF-8 --가변기 한글3byte사용,영어1byte
+================================================
+in.read(read,0,500) 500개를 전부 못읽을수 있는 문제가 있다.
+================================================
+FileStream-37쪽
+FileInputStream fin=new FileInputStream("data.txt");
+BufferdInputStream bin=new BufferedInputStream(fin); 의사용보단
+InputStream in=new FileInputStream("data.txt");
+in=new BufferedInputStream(in);
+================================================
+DataOutputStream 이란??
+================================================
+writeUTF()란 
+2바이트만큼 추가되는 메서드
+길이를 알려주기위해서 2바이트 추가
+================================================
+Writes 클래스란
+UTF-8이라는 방식만 알려주면 ex ) '한' 이라는 3바이트를 한번에 저장
+==========================================
+숙제
+
+Output,Input stream 에 따라 읽고 쓰고 인코딩에따라 확인
+================================================
+쓰레드 <=> 프로세스
+쓰레드 : 한번에 여러 작업을 할 수있게하는것(메모리 공유)
+프로세스 : 메모리를 공유하지 않음 
+===============================================
+There are at least two solutions to this problem. The first is to reuse processes rather
+than spawning new ones--프로세스를 의미. When the server starts up, a fixed number of processes (say,
+300) are spawned to handle requests. Incoming requests are placed in a queue. Each
+process removes one request from the queue, 재사용\
+두가지 해결방법이 있다.
+새로운 프로세스를 생성하는 것보다 프로세스를 재사용하는 것이다.
+서버가 시작할 때 요구를 관리할 정해진 갯수의 프로세스들이 생성되어진다.
+들어오는 요구를 큐에 배치한다.
+
+===============================================
+The second solution to this problem is to use lightweight threads instead of heavyweight
+processes to handle connections. Whereas each separate process has its own block of
+memory, threads are easier on resources because they share memory. 
+무겁다:OS가 프로세스 생성에 할일이많다.
+가볍다 : 쓰레드 OS가 여러일을하는데 공유+ 메모리공유하기때문에
+
+두번째 방법은 무거운 process대신에 가벼운 것을 쓰는 것이다.
+프로세스는 분리된 고유 메모리 영역을 가지고 있는 반면에 쓰레드는 자기 자신 스스로 메모리 영역을 가지고 있기 때문에 더 쉽다.
+=============================================
+a thread-based
+design is usually where you should start until you can prove you’re hitting a wall
+한계까지 쓰레드를 사용해도된다 Exception 카톡,페북
+===============================================
+A thread with a little t is a separate, independent path of execution in the virtual machine.
+A Thread with a capital T is an instance of the java.lang.Thread class.
+
+================================================
+쓰레드 사용법
+1. extends Thread  상속후=>  run () 구현 => .start()
+2. Ruunable implements  =>  run () 구현 => 쓰레드 안에 인터페이스를 넣음 => .start()
+자바 다중상속이 안되는 특성상 2.의 방법을 더많이 사용
+================================================
+.start() 쓰레드를 돌리는것
+.run()은 함수를 실행 => 순차 실행(쓰레드 동작x)
+================================================
+sleep.() 이거는 자는 것
+yield() 양보하는것 나한테 할당 된것을 양보하는것
+t4. join() 쓰레드4번이 다 끝나야지 그 다음 것이 실행 되는 것 
+wait()멈추었다가  다른 쓰레드가 notify를 해주면 (이것도 메서드) 깨어나는 것 -> notifyAll()이건 다 깨우 는 것 =>sleep()과 차이 : 깨워주는것을 기다림
