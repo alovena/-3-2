@@ -5,7 +5,8 @@ public class InetAddressEx {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-			try { //getByname
+			try { 
+				//getByname
 				InetAddress ip=InetAddress.getByName("www.google.com");
 				System.out.println("getByname : "+ip.getHostAddress());
 				System.out.println("getByname : "+ip.getHostName());
@@ -24,7 +25,6 @@ public class InetAddressEx {
 					System.out.println("getAllByname : "+ip3[i].getHostAddress());
 					System.out.println("getAllByname : "+ip3[i].getHostName());
 				}
-				
 				
 				//getAddress
 				byte bytes[] = ip.getAddress();
