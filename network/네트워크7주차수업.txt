@@ -1,0 +1,70 @@
+﻿callable 는 리턴이 있는 쓰레드 , service submit = thread(인스턴스).start 와 동일 그에대한 결과를 받는것은 Future 
+그래서 callback 를 다시 만들 필요가없다.
+===============================================
+Synchronized
+System.out.print(input + ": ");
+System.out.print(DatatypeConverter.printHexBinary(digest));
+System.out.println();
+런안의 3가지 메서드의 실행을 보장해주고 ㄴ남은 쓰레드는 대기!
+
+synchronized (out) {
+Date d = new Date();
+out.write(d.toString());
+out.write('\t');
+out.write(message);
+out.write("\r\n");
+}
+도 마찬가지 메서드의 실행을 보장해주고 남은 쓰레드는 대기!
+하지만 동기화를 자주사용할 경우 성능저하를 가져오기때문에 , 데드락이 될 확률을 높이기때문에 많이 사용하면 좋지않다.
+1. For one thing, it exacts a severe performance penalty in
+many VMs 
+2. Second, it dramatically increases
+the chances of deadlock. Third, and most importantly, it’s not always the object itself
+you need to protect from simultaneous modification or access
+
+해결법 => 1.멤버변수(필드)를 사용x , 로컬변수(지역변수)를 사용해라
+메서드 종료시 로컬변수는 사라지므로
+2. String 클래스를 사용하여라(왜냐면 immutable이기때문) 반면 StringBuilder은 mutable이기 때문
+String str="abc" abc 에 할당되었고 str은 abc를 가르킴
+->str= "def" def 에 할당되었고 str은 abc를 가르킴
+
+Deadlock
+데드락은 두개의 쓰레드가 exclusive할때 발생
+우선순위가 먼저인것부터 진행
+
+Preemption
+우선순위가 높은 애 부터 먼저 들어옴
+
+thread can pause in favor of --
+It can block on I/O.
+? It can block on a synchronized object.(synchronize 할때 다른쓰레드못들어옴)
+? It can yield. (나에게 주어진 시간을 양보 한타임-one time넘김)
+? It can go to sleep.(지정 시간동안 쓰레드 동작x)
+? It can join another thread. (그 쓰레드가 끝날때까지 기다림 ex) Tread A안에 Tread b.join 을 하면 b가 끝날때 동안쓰레드 A대기)
+? It can wait on an object. wait는 오브젝트 클래스 모든 클래스에 적용됨
+? It can finish.
+? It can be preempted by a higher-priority thread.
+? It can be suspended.
+? It can stop.
+
+notify() 다음꺼실행
+GZipInterface
+=========================
+Chapter4. Internet Address
+ip3계층에서 사용
+Ipv4 4byte
+ipv6 16byte
+FE8A:ABCD:... 로 8개씩들어감 F:4비트(0.5byte)*4 =2byte*8=16byte
+
+웹주소를 친다 - DNS가 도메인명을 판단 -ip주소값을 return 해줌 - 사용자는 이주소로 패킷을 보냄 -
+DHCP 란?
+			tx	rx
+unicast			1	1
+Broadcast		1	1/0
+Multicast			1	N
+loofback
+
+
+Spam
+1.2.3.4 => 4.3.2.1. sb & spamhans.org => DNS => if(return) => spam 
+
