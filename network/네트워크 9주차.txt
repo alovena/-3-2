@@ -1,0 +1,67 @@
+URI vs URL (R은 Resource를 나타냄)
+그림,웹페이지,책이름
+URI
+URN
+N은 네임
+L은 Location을 나타냄 
+모든 URL는 URI에 속한다 (하지만 자바에서는 클래스
+가 다르게있다)
+http : URLConection 으로 처리
+
+HTML is a hypertext markup language because it includes a way to specify links to other
+documents identified by URLs.
+HTMl은 고도화된 문서 언어다 왜냐하면 링크를 보여줄 방법을 가지고있다(URL로 건다. 정확한)
+URL중 흔한타입은 URI이며 Resource Indentifier 리소스 식별자이다,
+URI는 리소스를 확인 (볼 수 있으며) 그곳에는 이름 숫자 문자등 있다.
+URI는 문자열 리소스를 확인할 수 있는 규칙(문장)
+서버 이메일 주소 메세지 책이름 사람이름,주식가격등이있다.
+
+URI는 스키마의 하나의 구성이며 콜론으로 구성된다.
+
+Http://www.hanbat.ac.kr//abc/d.html
+rout/abc/d.tml
+rout<- WebServer 아파치가 처음 설정
+URI
+Http <- schme
+www.hanbat.ac.kr <- authority
+URL
+mp3:mp3 유저의 mp3 ID, 패스워드
+@ci... 서버를나타냄
+:33 <- port번호 나타냄 
+URL은 포터넘버 80번이 기본 셋팅
+/Van... Rout밑에 이 파일을 뜻
+
+URL은 URi인데 ,리소스 를 구분 ,Location을 나타낸다 보여준다. 그 위치는 클라이언트가
+그 리소스의 위치를 알아내서 가져올수있다 즉 URL을 사용하여 d.html를 가져올 수 있다.
+
+다시 ,URI는 해리포터이름
+URL는 책장 어디위치에가면 책이있다의 정보 즉, 위치정보임
+URI를 사용하는경우 이메일임 이름을찾아감
+
+HTTP는 어떻게 웹클레이언터(브라우저) 가 서버와 데이터를 전송하는지 그리고 데이터가 서버에서 클라이언트로 어떻게 옮겨지는지를 정의한 규약입니다.)
+HTTP를 사용하는 프로그램을 제작 Write 배출? 하기위해선 HTTP를 이해해야한다. 웹디자이너 보다 깊게 ! 
+HTTP request <= >Response
+request : 웹주소의 파일을 요구
+방식은 get,delete,put,header,post
+Header=>GET방식을 요구한다.
+1.get밑에 호스트가 있긴함 즉 HOST에게 get 방식을 원한다를 전송!
+2.Data 부분까지 포함하는것을 POST
+3.Server는 Response를 전송! 
+The Hypertext Transfer Protocol (HTTP) is a standard that defines how a web client talks to a server and how data is transferred from the server back to the client. Although HTTP is usually thought of as a means of transferring HTML files and the pictures embedded in them, HTTP is data format agnostic. 
+
+
+1. The client opens a TCP connection to the server on port 80, by default; other ports
+may be specified in the URL.
+2. The client sends a message to the server requesting the resource at a specified path.
+The request includes a header, and optionally (depending on the nature of the
+request) a blank line followed by data for the request.
+3. The server sends a response to the client. The response begins with a response code,
+followed by a header full of metadata, a blank line, and the requested document or
+an error message.
+4. The server closes the connection.
+
+1.웹브라우저는 TCP 열음 포트80으로
+2.웹브라우저는 Location에 있는 ReSource 를  서버에게 메세지를 보냄 
+여기 Request에는 헤더, data(POST인 경우)를 보냄 순서는 blankline(header정보)->data를 보냄
+3.서버는 웹서버에 응답을 보낸다.
+4.응답은 응답코드로 받게되며, 응답코드-> 헤더 -> blankline -> 요청 문서 또는 에러메세지 
