@@ -1,0 +1,66 @@
+
+리퀘스트 헤더
+
+리스폰스 헤더
+
+(과제 : 이미지는 어차피 바이너리고 이걸 한 바이트 읽고 내꺼에다가 쓰면 그대로 가져옴)
+FileOutputStream을 통해 openStream으로 읽고 쓰면 됨...
+파일이 작은경우
+한번에 읽은 것을 리턴해주지만
+파일이 큰경우new byte[2048] 2k바이트를 넘기면
+한번에 못 읽은 경우 문제가 생긴다.
+
+웹서버 접속시 htdos/ ==locolhost
+http request < = > http response 
+
+	Client		Server
+Header		Header =>data+sender
+BlockLikne	
+Data		index.html <Html> </Html> 이 반환되어 전송
+
+Header <=> Header 정보교환
+
+Reader는 한바이트씩//2번째 인자값은 UTF-8 설정가능
+
+==================================================
+The POST method is the most general method. It too uploads a representation of a resource
+to a server at a known URL, but it does not specify what the server is to do with
+the newly supplied resource. 
+POSt 메서드는 가장일반적인 메서드이며 이것은 업로드시킴 리소스의 파일을 서버에 올림  URL에 
+하지만 이것은 명시화되지않는다 보이지않는다 서버가 새롭게 올라온 리소스가 뭐할지는 모른다. 즉 서버가 알아서할뿐 서버가 알아서 처리함 URL에 등록하기만한다.
+POST should be used for unsafe operations that should not be repeated, such
+as making a purchase.
+==================================================
+The POST method is the most general method. It too uploads a representation of a resource
+to a server at a known URL, but it does not specify what the server is to do with
+the newly supplied resource. 
+POSt 메서드는 가장일반적인 메서드이며 이것은 업로드시킴 리소스의 파일을 서버에 올림  URL에 
+하지만 이것은 명시화되지않는다 보이지않는다 서버가 새롭게 올라온 리소스가 뭐할지는 모른다. 즉 서버가 알아서할뿐 서버가 알아서 처리함 URL에 등록하기만한다.
+POST should be used for unsafe operations that should not be repeated, such
+as making a purchase. POST는 안전하지않는 방식을 사용한다. 반복되선 안됨 겟은 그냥 가져오는건데 여러번 보내도 문제가되는데 로그인 중확인복인 x
+==================================================
+elharo.com의
+/blog/software-development/the-power-of-pomodoros/ HTTP/1.1
+
+밑에 밑에 xml 내용을 put해라 이런의미
+==================================================
+쿠키 : 많은 웹사이트는 쿠키라는 짧은 텍스트를 사용하는데 고객의 persistent 유지되는 고객 정보를 저장! 
+쿠키는 서버강 클라이언트로 전송 되어 (response 란얘클라이언트가 정보를 가지고있다가 그 쿠키값을 서버로 전송(웹ㅂ브라우저는 서버가 나에게 준것을 모름)
+방법 : 서버가 카트에 담아둠 정보를 담아둠 피스트
+
+==================================================
+서버가 쿠키의 유통기한 정보를 줌!
+Head와 Data부분을 볼 수있는것이 URL 커넥션임
+헤더에보면 이런것들이 있다. 헤더정보를 읽을 수 있다. ex) 
+Content-type : 스트링 서버가 보내는것을 읽어서 메서드로 리턴
+서버가 보내느건 스트링 . 하지만 메서드에서 변환시켜서 Date ,int 값으로 리턴 가능
+getContentType 메서드는 MIME 미디어 가능을 리턴 URLConnection 은 스트링을 인트나 데이터로 리턴
+Content-type : text/html charset=UTF8은 알려줄수도있고 알려주지않을수있다 charset을
+getDate() 는 지금까지 흐른 1900년부터 시간리턴
+==================================================
+ POST는 안전하지않는 방식을 사용한다. 반복되선 안됨 겟은 그냥 가져오는건데 여러번 보내도 문제가되는데 로그인 중확인복인 x
+숙제 1. 아마존의 주는쿠키를 조사하기..!!!@#$%^*()_+
+        2. 교재의 FomPost에서 
+-post value 3개 전송
+-Cookie 3개이상 설정 헤더에 쿠기넣어서! 쿠키콜론 프로퍼티리퀘스트..
+-returns 결과를 html파일로 저장하기 클릭시 웹페이지에서 보도록
