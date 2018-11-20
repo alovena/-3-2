@@ -1,0 +1,20 @@
+AlertDialog.Builder br
+br.setView(layout) 를 만들기위해선
+LinerLayout li=new LinerLayout(this);
+LayoutInflater inflater=(LayoutInflater)li.getinflater(R.layout.dialog_xml);
+
+@onReqeustPermisiionResult 는 클릭후 실행되는 메서드
+
+ D/mkdir: /storage/emulated/0/Android/data/com.example.com418.datastorage/files/mydir
+
+숙제1. calendarView internal= > 을 Database로 바꾸기
+
+날짜 | 내용(SQlite) 동작은 실습과 동일 위치 db테이블안 db만들기.
+
+숙제2. 외장 SD카드에서 pictures / 부분에 그림을 5개정도 넣어두고 불러오기
+pre  next
+앱에서 ImageView  왔다갔다가 
+순환이 가능하도록
+
+DB에서 URL경로만 넣음(실행전까지 에러인지 아닌지를 모름 컴파일이 안됨) 
+SQL 디비를 Acess할 수 있는 Room이 생김(컴파일시 미리 스키마검사)
