@@ -1,0 +1,23 @@
+external 파일이라함은 삼성기준 : emulated/0
+내부메모리안에 공용으로 쓸 수 있는 것을 external이라고 부름
+Phone 내부에 /data/data => internal 영역이라고 부름 이것외에
+폰을 usb로 연결시 external 영역이라고함 
+따라서 getExternal이라고함은 phone안에 data/data 가아닌 공용으로 사용할 수 있는 영역을 external이라고함
+sdcard 를 secondary external이라고 부름
+그리고 emulater같은경우 emulated/0/ 는 external 영역임
+self/primary 와 =emulated/0/ 같음 =
+storage/0000-00AB와같은것이 sd영역 심볼릭 링크가  걸려있음 
+
+secondary external을 잡아오는 메서드가 없음 그래서 mount 폴더를 찾거나
+16진수로 폴더를 찾음?>
+내코드 : 파일의 패쓰만 변경해주면된다.
+안드로이드는 리눅스 기반 시스템
+
+
+브로드캐스트 리시버(Broad Receiver) : 
+컨텐트 프로바이더 (Content , Resource ) 형식은 URI 형식으로 제공
+intent 기능 1. StartActivity() Intent() 정보를 인텐트안에 집어 넣음
+intent 기능 2. Main에서 Main호출시 쌓이지않게 flag로 설정가능
+intent 기능 3. Intent에 값을 전달!!하기 key-value형태로 값,클래스로도 가능!
+
+
