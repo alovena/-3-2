@@ -1,0 +1,39 @@
+Head :Head 부분 데이터만 받고싶다면
+PUT,DELETE : 서버 등재 ,삭제
+\
+GET,POST 
+HEADER 실습 => LastModified
+Data is transmitted across the Internet in packets of finite size called datagrams. Each
+datagram contains a header and a payload. The header contains the address and port to
+which the packet is going, the address and port from which the packet came, a checksum
+to detect data corruption, and various other housekeeping information used to ensure
+reliable transmission. The payload contains the data itself. 
+
+데이터는 전송됩니다 .데이터그램이라고불리는 패킷에서 인터넷을 통해
+각각의 데이터 그램은 헤더와 payload 를 포함한다. 그 헤더는 주소와 포트번호를 포함하고있으며 그각각의 데이터(주소,포트번호)는 전송중 (목적지가됨)  포트는 목적지로 가고
+주소와 포트번호는 패킷이 오는것(여기선 체크썸,잡다한정보를포함) 페이로드는 데이터 그자체를 가지고있다. 즉 데이터라는얘기 여기선 ipAddress 3계층에있음 5계층과 4층을 포트로 연결 어플리케이션층을 구분하기위해 포트번호가 존재 (받는 입장에서 어느 어플리케이션에 결정)
+ Sockets allow the programmer to
+treat a network connection as just another stream onto which bytes can be written and
+from which bytes can be read.
+소켓은 프로그래머가 넽느워크연결이 가능하게 해준다 . 그래서 바이트를 읽고쓰기 가능
+
+A socket is a connection between two hosts (호스트는 :컴퓨터를 의미)
+1.상대방컴퓨터 연결
+2.데이터전송
+3.데이터 받기
+4. 연결 닫기
+5. 포트 결합
+6. 서버는 클라이언트로부터 데이터 올때까지 대기
+7. 연결을 받고 서버는 대기
+
+telnet time-c.nist.gov 13 
+서버 시간 반환 
+
+TT indicates whether the United States is currently observing on Standard Time or
+Daylight Savings Time: 00 means standard time; 50 means daylight
+
+TT는 나타냅니다 US가 현재 표준시간 또는 
+daytime 은 스트링반환
+timeprotocol은 integer 로 1900년대 부터 흘렀던 밀리세컨드 반환 정수로
+
+4바이트 받는방법 1바이트씩 읽음 ABCD 4바이트라면 000A 00AB 0ABC ABCD 로 4바이트 옮김 밀고 붙임
