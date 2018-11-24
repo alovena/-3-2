@@ -45,7 +45,7 @@ public class ThirdActivity extends AppCompatActivity {
                 Intent intent = new Intent(ThirdActivity.this, SecondActivity.class);
                 intent.putExtra("result",30);
                 setResult(RESULT_OK,intent);
-                startActivity(intent);
+               // startActivity(intent);
                 finish();
             }
         });
