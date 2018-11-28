@@ -1,39 +1,89 @@
-Head :Head 부분 데이터만 받고싶다면
-PUT,DELETE : 서버 등재 ,삭제
-\
-GET,POST 
-HEADER 실습 => LastModified
-Data is transmitted across the Internet in packets of finite size called datagrams. Each
-datagram contains a header and a payload. The header contains the address and port to
-which the packet is going, the address and port from which the packet came, a checksum
-to detect data corruption, and various other housekeeping information used to ensure
-reliable transmission. The payload contains the data itself. 
+#과제1
+trace 메서드설정
+return 헤더 설정
+클라이언트 헤더 띄우고 밑에 바디 (데이터부분이있음) 
+일반적인 get방식이면  헤더부분에 데이터가 적힘
+서버도 똑같이 헤더+data로 구성되있음
+서버 헤더에는 200ok DATa 
+TRACE : 클라이언트가 보낸 데이터를 데이터바디에 실어서 보낸다.(응답) 즉 테스트용이다.
+inputstream으로 바디까지읽는다면 테스트완료.!
+소켓통신인 경우
+실제 데이터는 소켓을 통해 주고 받음 소켓입장에서 getInputStream은 header,Data구분을 못해 그냥 다 읽음(모든 데이터)
+#과제2
+google 에 한밭Search 
+qs.add(key,value) key : hl 
+UTF8로 강제변환 ->queryString 
+InputStream을 그냥읽으면 리턴이 안옴 왜 ? User-Agent는 자바임 그래서 User-Agent는 웹주소로 바꾸어버림 (User-Agent는 바디에 포함)
+#과제3
+과제 3은 포스트방식으로 헤더와 데이터를 보냇는데 URL로 이번에는 소켓으로 데이터전송을 하는것 , 따라서 전체데이터를 다 보내줘야함! HTTP프로토콜과 관계가없어 프로토콜에 맞게끔 보내야한다. query.add는 데이터부분에 해당 
+소케의 getInputStream은 서버 데이터를 다 읽어옴
+========================================
+지난 시간 TCP통신에 대한 정보를 배움
+#TCP UDT 차이 
+신뢰성(재전송 여부) 차이 SeqNumber과 AckNumber이 있음
+1,2,3번에 해당되는 데이터가 온다면 AckNumber은 4를 리턴해준다.
+1o 2x 3 o 라면 ACk는 2번을 리턴해줌
+#Socket 토신
+Socket(host,port) 
+host== ip 를 안다면 컴퓨터까지 찾아가는것
+포트번호 구분을 하는 이유 : 어플리케이션을 구분하기 위해서
+통신을 위해서 처음 열기위해서 3단계가 필요 (3hand-shakes request(ack+seq) response (ack) ok request ok(다음 ack를줌) ) 이 완료되면 정보를 주고 받음  123,ack =>123받고 ack를주면 그다음 456..ㅇ을 보냄
+포트번호 sequence넘버 즉, 시작 번호를 전송 
+소켓구조를 만들고 InetSockeyAddress를 사용하여 host,port를 넣어 연결 가능
 
-데이터는 전송됩니다 .데이터그램이라고불리는 패킷에서 인터넷을 통해
-각각의 데이터 그램은 헤더와 payload 를 포함한다. 그 헤더는 주소와 포트번호를 포함하고있으며 그각각의 데이터(주소,포트번호)는 전송중 (목적지가됨)  포트는 목적지로 가고
-주소와 포트번호는 패킷이 오는것(여기선 체크썸,잡다한정보를포함) 페이로드는 데이터 그자체를 가지고있다. 즉 데이터라는얘기 여기선 ipAddress 3계층에있음 5계층과 4층을 포트로 연결 어플리케이션층을 구분하기위해 포트번호가 존재 (받는 입장에서 어느 어플리케이션에 결정)
- Sockets allow the programmer to
-treat a network connection as just another stream onto which bytes can be written and
-from which bytes can be read.
-소켓은 프로그래머가 넽느워크연결이 가능하게 해준다 . 그래서 바이트를 읽고쓰기 가능
+#host-url 
+host =. https:// 안들어감
 
-A socket is a connection between two hosts (호스트는 :컴퓨터를 의미)
-1.상대방컴퓨터 연결
-2.데이터전송
-3.데이터 받기
-4. 연결 닫기
-5. 포트 결합
-6. 서버는 클라이언트로부터 데이터 올때까지 대기
-7. 연결을 받고 서버는 대기
+#socketinfo 하기
+connected 됬는지 안되었는지 조건 : isConnected 된적있고 , 그리고 닫히지 않았다.
+#SO_LINGER 란?
+보낼것이 남아있는데 소켓이 닫혀버렸다면 : 잠깐 기다려주긴함 그러고 안되면 내부에 있는것을 버림 
 
-telnet time-c.nist.gov 13 
-서버 시간 반환 
+#지터란?
+delay의 변동을 지터라고 부름
+#Whois란?
+마치전화번호부 같은것       
+#Server Socket이란
+소켓은 대기가 일 언제나 대기상태,
+소켓이 연결이 들어오면 서버는 또 다른 소켓을 만듬 즉 멀티소켓 
+#Blocking I/O란?
+소켓에서 read,write를 하는것은 Blocking I/O 기 때문에 쓰레드 처리를 해야한다.
 
-TT indicates whether the United States is currently observing on Standard Time or
-Daylight Savings Time: 00 means standard time; 50 means daylight
+#NonBlocking I/O란 ?
+여러개 소켓들 중 이벤트 발생시 처리 -> 인터럽트처럼 
+#Sockets For Servers
+Each server socket listens on a particular port on the server machine.
+ When a client on a remote host attempts to connect to that port, the server wakes up, negotiates the connection between the client and the server, and returns a regular Socket object representing the socket between the two hosts. 
+각 서버소켓은 듣는다 컴퓨터에 있는 포트를
+클라이언트가 포트로 연결을 시도할때 서버는 wakes up 상태가 되고 클라이언트와 서버 사이에 연결을 협상해준다. 그리고 서버는 소켓오브젝트를 리턴 즉, 서버는 똑같은 소켓을 만들어 통신!
+#서버 프로그램 생명주기
+1. 서버소켓생성
+2.서버소켓 대기
+3.
+4.
+5.6...
+#Server Socket
+server.socket()
+클라이언트 접속시 리턴발생 후 소켓이 만들어짐
 
-TT는 나타냅니다 US가 현재 표준시간 또는 
-daytime 은 스트링반환
-timeprotocol은 integer 로 1900년대 부터 흘렀던 밀리세컨드 반환 정수로
+클라이언트의 서버 접속 방법 : telnet localhost 8080(portnumber)
+서버는 무한정 대기 클라이언트가 끊겼다고 서버도 끊기는 것이아니다>!
 
-4바이트 받는방법 1바이트씩 읽음 ABCD 4바이트라면 000A 00AB 0ABC ABCD 로 4바이트 옮김 밀고 붙임
+실제로는 소켓을 가지고있어야하기 때문에 ThreadPool에 집어 넣어야한다.
+#TimeServer
+자바는 1970년대 밀리쎄컨드 프로토콜은 1900년 초를 기준으로 맞게끔 변환시켜주는것
+#자료형 크기란
+int 4byte
+A		 B	 C	 D
+MSB(최상위비트)-높은쪽이MSB	 LSB
+
+#소켓이 너무 많아 메모리를 차지한다면?
+쓰레드풀을 생성해서 소켓을 생성한다.
+#과제1 .
+서버는 복붙 (4바이트를 보내는것을 쓰레드풀을 만들고 )
+8장 클라이언트 time서버 접속 4바이트를 현재시간으로 바꿈을
+local로 접속하여 서버확인
+#과제2
+echo Server를 만들어라 
+서버 : 접속이들어오면 쓰레드를 만듬 소켓을가지고 inputstream으로 읽어 아웃풋으로 보냄
+단 ThreadPool방식으로 만들것
