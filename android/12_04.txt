@@ -1,0 +1,33 @@
+﻿removable sd카드가 있어서 외부 저장소안에 들어있다.
+과제#1
+내부 저장소 : internal 은 data/data/패키지/밑에있는것을 내부저장소라고함
+Manifest안에 
+provider가 필요함 (권한,이름,URiPermision)
+ACTION_VIEW 로 보기! xml/file_path.xml 경로를 넣어줌
+get..정보가 파일의 실제 위치
+
+1.패키지이름+"provider"
+getDir->내부
+content:// (authority) / (name)/(DCIM) 
+intent정보를 입력해주고 넘기면 읽을 수 있다.
+2. storage/16진수/hanbat.png
+
+과제#2 
+리사이클러뷰
+...
+오늘 mp3 => service
+googleMap 보기
+broadcast Receiver ex) 전원연결 문자왔다 앱에게 알람을 주는것
+
+
+key 받아오기:
+1.URI 키발급
+2.xml에 키값주입
+
+CallLog
+1.앱권한
+2.intent로 가져올것
+
+Cursor -> table같은 경우 많이 가져옴
+
+ppt ,apk , 소스(메일 or 사이버한밭)
