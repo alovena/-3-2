@@ -1,0 +1,65 @@
+#과제1
+non 블라킹 핵심 채널을써서 버퍼에 쌓인것을 읽음
+channel.read(buffer)
+
+버퍼에있는것을 뽑아 쓴다고 할 때 
+write(buffer)
+-----------------------------서버------------------------------
+1.소켓채널을 만들고 포터 연결
+2.configureBlocking를 false
+3.채널을 셀럭터에 등록 해줌
+4.key : OP_ACCEPT 
+4.+ : 이벤트 발생시 채널이 있는지 물어봄
+5.이벤트 발생시 캐치 하고 처리한다.
+6.키 is Acceptable이라면 -> 서버채널에 이벤트 발생 여부 o,x
+7.해동 소켓채널을 셀럭트에 다시 등록
+8.register를 OP_WRITE를 셀럭테에 등록
+9.buffer을 연결 해서 버퍼에 넣어줌 : carry return 때문에 +2 
+10. 그 키를 Writable이 불리면 문장실행(거의 매번 불림)
+11. hasRemaing()이 남아있다면 처음 포지션으로 되돌아감/.
+-----------------------------소켓------------------------------
+클라이언트에서는 넘겨준것을 출력!
+Reader.
+
+-----------------------------수업------------------------------
+postion , capacity , limit 
+초기 limit=capacity
+ A B C 인 상태에서 flip 를 실행 하면 limit을 현재 포지션으로 position= 0 으로
+리밋이 필요한 이유 : 버퍼에 채운후 읽어야함 A B C 까지 읽은 후 limit전까지 읽고 
+그 이 후로는 못읽게 하기 위해 limit을 만드는것임
+rewind 는 position = 0 으로 limit= capacity  그대로
+clear 는 position =0 
+
+hasremaing 원리 : position과 limit의 갯수 관계를 가지고 동작
+
+write할때 position을 증가++
+
+buffer.get()을 함 첫 포지션값을 읽음
+
+--------------------------------------------------------------------
+IntgenServer : int value = output.getInt(); 4바이트만큼 취급해서 보내라
+IntBuffer view = buffer.asIntBuffer();  view는 새로만든것이 아니라 이것은 
+기존의 바이트버퍼를 인트버퍼로 취급하겠다 
+buffer.get()로 해볼것 1바이트 가져와서 의미가없고 4바이트씩 가져와야함
+buffer.close()는 내용을 지우는것이 아니라 포지션만 이동
+view.rewind(); 
+
+client.read(buffer) 버퍼에서 읽어서 포지션이 땡겨지지만
+view.get()의 포지션은 0번째임
+buffer.rewind()
+int actual =buffer.getInt() ; 
+로 2줄을 값을 뽑아냄
+
+보낼때 버퍼에 채우고 write 를 하기 위해서 filp
+읽을때 read로 바이트 버퍼를 채우고 filp 을해서 읽음
+
+--------------------------------------------------------------------
+EchoServer은 OP_WRITE OP_READ 둘다 설정
+서버가 
+compat를 한다. 의미는 중간에 보내다가 A B 를 보내다가 C,D를 못보냄 그러면 
+C,D를 앞으로 가져옴!
+
+
+
+
+
