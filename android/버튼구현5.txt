@@ -1,0 +1,76 @@
+package com.example.com418.myapplication;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    Button button1;
+    Button button2;
+    Button button3;
+    Button button4;
+    EditText et1;
+    EditText et2;
+    TextView tv3;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        int i=1234;
+        button1=findViewById(R.id.test1);
+        button2=findViewById(R.id.test2);
+        button3=findViewById(R.id.test3);
+        button4=findViewById(R.id.test4);
+        et1=findViewById(R.id.et1);
+        et2=findViewById(R.id.et2);
+        tv3=findViewById(R.id.tv3);
+        //방법1
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               String s1=et1.getText().toString();
+               String s2=et2.getText().toString();
+               tv3.setText(Integer.parseInt(s1)+Integer.parseInt(s2)+"");
+            }
+        });
+        //방법3
+        button3.setOnClickListener(this);
+        //방법4 인자로 넘어온 View v 는 인자로 넘어온 버튼에 해당됨
+        //button4.setOnClickListener(mclick);
+
+        button4.setOnClickListener(new myonclick());
+    }
+    //방법2
+    public void Button2Click(View v){
+        String s1=et1.getText().toString();
+        String s2=et2.getText().toString();
+        tv3.setText(Integer.parseInt(s1)-Integer.parseInt(s2)+"");
+    }
+
+    @Override
+    public void onClick(View view) {
+        String s1=et1.getText().toString();
+        String s2=et2.getText().toString();
+        tv3.setText((double)(Integer.parseInt(s1)/Integer.parseInt(s2))+"");
+    }
+    Button.OnClickListener mclick= new Button.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getApplicationContext(),"Hello world!"+button4.getText().toString()+"4",Toast.LENGTH_LONG).show();
+        }
+    };
+    //방법5
+    class myonclick implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            String s1=et1.getText().toString();
+            String s2=et2.getText().toString();
+            tv3.setText(Integer.parseInt(s1)*Integer.parseInt(s2)+"");
+        }
+    }
+}
