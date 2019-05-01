@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et1=findViewById(R.id.et1);
         et2=findViewById(R.id.et2);
         tv3=findViewById(R.id.tv3);
-        //¹æ¹ı1
+        //ë°©ë²•1
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,14 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                tv3.setText(Integer.parseInt(s1)+Integer.parseInt(s2)+"");
             }
         });
-        //¹æ¹ı3
+        //ë°©ë²•3
         button3.setOnClickListener(this);
-        //¹æ¹ı4 ÀÎÀÚ·Î ³Ñ¾î¿Â View v ´Â ÀÎÀÚ·Î ³Ñ¾î¿Â ¹öÆ°¿¡ ÇØ´çµÊ
+        //ë°©ë²•4 ì¸ìë¡œ ë„˜ì–´ì˜¨ View v ëŠ” ì¸ìë¡œ ë„˜ì–´ì˜¨ ë²„íŠ¼ì— í•´ë‹¹ë¨
         //button4.setOnClickListener(mclick);
 
         button4.setOnClickListener(new myonclick());
     }
-    //¹æ¹ı2
+    //ë°©ë²•2
     public void Button2Click(View v){
         String s1=et1.getText().toString();
         String s2=et2.getText().toString();
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(),"Hello world!"+button4.getText().toString()+"4",Toast.LENGTH_LONG).show();
         }
     };
-    //¹æ¹ı5
+    //ë°©ë²•5
     class myonclick implements View.OnClickListener{
         @Override
         public void onClick(View v){
